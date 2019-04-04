@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <SDL.h>
+#include <math.h>
 #include "Screen.h"
 
 using namespace std;
@@ -25,7 +26,25 @@ int main()
 
 	while(true)
 	{
+		// Update particles
 
+		// draw particles
+		int elapsedTime = SDL_GetTicks();
+		unsigned char red = (unsigned char)((1 + cos(elapsedTime * 0.0003)) * 128);
+		unsigned char green = (unsigned char)((1 + sin(elapsedTime * 0.0001)) * 128);
+		unsigned char blue = (unsigned char)((1 + sin(elapsedTime * 0.005)) * 128);
+
+		for(int y = 0; y < Screen::SCREEN_HEIGHT; y++)
+		{
+			for(int x = 0; x < Screen::SCREEN_WIDTH; x++)
+			{
+				screen.setPixel(x, y, red, green, blue);
+			}
+		}
+		// draw screen
+		screen.update();
+
+		// process events/messages
 		if(screen.processEvents() == false)
 		{
 			break;
