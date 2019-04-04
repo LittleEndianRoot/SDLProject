@@ -34,9 +34,9 @@ int main()
 		unsigned char green = (unsigned char)((1 + sin(elapsedTime * 0.0001)) * 128);
 		unsigned char blue = (unsigned char)((1 + sin(elapsedTime * 0.005)) * 128);
 
-		for(int y = 0; y < Screen::SCREEN_HEIGHT; y++)
+		for(int y = 250; y < Screen::SCREEN_HEIGHT-250; y++)
 		{
-			for(int x = 0; x < Screen::SCREEN_WIDTH; x++)
+			for(int x = 350; x < Screen::SCREEN_WIDTH-350; x++)
 			{
 				screen.setPixel(x, y, red, green, blue);
 			}
