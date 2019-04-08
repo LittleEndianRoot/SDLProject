@@ -10,15 +10,10 @@
 namespace littleendianroot
 {
 
-Screen::Screen()
+Screen::Screen():
+		m_window(NULL), m_renderer(NULL), m_texture(NULL), m_buffer(NULL)
 {
-	// TODO Auto-generated constructor stub
 
-}
-
-Screen::~Screen()
-{
-	// TODO Auto-generated destructor stub
 }
 
 bool Screen::init()
@@ -74,6 +69,40 @@ bool Screen::init()
 	memset(m_buffer, 0, SCREEN_WIDTH*SCREEN_HEIGHT*sizeof(Uint32));
 
 	return true;
+}
+
+void Screen::clear()
+{
+	memset(m_buffer, 0, SCREEN_WIDTH*SCREEN_HEIGHT*sizeof(Uint32));
+}
+
+void Screen::update()
+{
+	SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH*sizeof(Uint32));
+	SDL_RenderClear(m_renderer);
+	SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
+	SDL_RenderPresent(m_renderer);
+}
+
+void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
+{
+
+	if(x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HEIGHT)
+	{
+		return;
+	}
+
+	Uint32 color = 0;
+
+	color += red;
+	color <<= 8;
+	color += green;
+	color <<= 8;
+	color += blue;
+	color <<= 8;
+	color += 0xFF;
+
+	m_buffer[(y * SCREEN_WIDTH) + x] = color;
 }
 
 bool Screen::processEvents()
