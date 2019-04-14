@@ -34,9 +34,9 @@ int main()
 
 		swarm.update(elapsedTime);
 
-		unsigned char red = (unsigned char)((1 + sin(elapsedTime * 0.0002)) * 128);
-		unsigned char green = (unsigned char)((1 + cos(elapsedTime * 0.0006)) * 128);
-		unsigned char blue = (unsigned char)((1 + sin(elapsedTime * 0.0009)) * 128);
+		unsigned char red = (unsigned char)((1 + cos(elapsedTime * 0.0004)) * 128);
+		unsigned char green = (unsigned char)((1 + sin(elapsedTime * 0.0009)) * 128);
+		unsigned char blue = (unsigned char)((1 + sin(elapsedTime * 0.0006)) * 128);
 
 		Particle const * const pParticle = swarm.getParticle();
 
